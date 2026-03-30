@@ -1,0 +1,5 @@
+# Large binary files
+*.exe
+
+# Nested git repos
+spectrai-community/
