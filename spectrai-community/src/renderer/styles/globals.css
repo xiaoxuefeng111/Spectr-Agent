@@ -1,0 +1,656 @@
+/**
+ * 全局样式定义
+ * @author weibin
+ */
+
+/* ========== 多主题 CSS 变量 ========== */
+
+/* 默认：暗色主题（:root 兜底） */
+:root,
+.theme-dark {
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #21262d;
+  --color-bg-hover: #30363d;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-muted: #484f58;
+  --color-accent-blue: #58a6ff;
+  --color-accent-green: #3fb950;
+  --color-accent-yellow: #d29922;
+  --color-accent-red: #f85149;
+  --color-accent-purple: #bc8cff;
+  --color-border: #30363d;
+  --color-input-bg: #161b22;  /* 深色主题用 secondary，与 primary 形成层次 */
+}
+
+/* GitHub Light */
+.theme-light {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f6f8fa;
+  --color-bg-tertiary: #f0f2f5;
+  --color-bg-hover: #e8eaed;
+  --color-text-primary: #1f2328;
+  --color-text-secondary: #57606a;
+  --color-text-muted: #8c959f;
+  --color-accent-blue: #0969da;
+  --color-accent-green: #1a7f37;
+  --color-accent-yellow: #bf8700;
+  --color-accent-red: #d1242f;
+  --color-accent-purple: #8250df;
+  --color-border: #d0d7de;
+  --color-input-bg: #ffffff;   /* 浅色主题用白底，shadow-sm 提供层次感 */
+}
+
+/* Solarized Dark */
+.theme-solarized-dark {
+  --color-bg-primary: #002b36;
+  --color-bg-secondary: #073642;
+  --color-bg-tertiary: #0a4050;
+  --color-bg-hover: #124d5c;
+  --color-text-primary: #fdf6e3;
+  --color-text-secondary: #93a1a1;
+  --color-text-muted: #657b83;
+  --color-accent-blue: #268bd2;
+  --color-accent-green: #859900;
+  --color-accent-yellow: #b58900;
+  --color-accent-red: #dc322f;
+  --color-accent-purple: #6c71c4;
+  --color-border: #0a4050;
+  --color-input-bg: #073642;   /* 深色主题用 secondary */
+}
+
+/* Nord */
+.theme-nord {
+  --color-bg-primary: #2e3440;
+  --color-bg-secondary: #3b4252;
+  --color-bg-tertiary: #434c5e;
+  --color-bg-hover: #4c566a;
+  --color-text-primary: #eceff4;
+  --color-text-secondary: #d8dee9;
+  --color-text-muted: #7b88a1;
+  --color-accent-blue: #88c0d0;
+  --color-accent-green: #a3be8c;
+  --color-accent-yellow: #ebcb8b;
+  --color-accent-red: #bf616a;
+  --color-accent-purple: #b48ead;
+  --color-border: #4c566a;
+  --color-input-bg: #3b4252;   /* 深色主题用 secondary */
+}
+
+/* ---- VS Code 常见主题 ---- */
+
+/* One Dark Pro */
+.theme-one-dark-pro {
+  --color-bg-primary: #282c34;
+  --color-bg-secondary: #21252b;
+  --color-bg-tertiary: #1e2227;
+  --color-bg-hover: #2c313c;
+  --color-text-primary: #abb2bf;
+  --color-text-secondary: #636d83;
+  --color-text-muted: #4b5363;
+  --color-accent-blue: #61afef;
+  --color-accent-green: #98c379;
+  --color-accent-yellow: #e5c07b;
+  --color-accent-red: #e06c75;
+  --color-accent-purple: #c678dd;
+  --color-border: #3e4451;
+  --color-input-bg: #21252b;
+}
+
+/* Dracula */
+.theme-dracula {
+  --color-bg-primary: #282a36;
+  --color-bg-secondary: #21222c;
+  --color-bg-tertiary: #191a21;
+  --color-bg-hover: #44475a;
+  --color-text-primary: #f8f8f2;
+  --color-text-secondary: #6272a4;
+  --color-text-muted: #44475a;
+  --color-accent-blue: #8be9fd;
+  --color-accent-green: #50fa7b;
+  --color-accent-yellow: #f1fa8c;
+  --color-accent-red: #ff5555;
+  --color-accent-purple: #bd93f9;
+  --color-border: #44475a;
+  --color-input-bg: #21222c;
+}
+
+/* Monokai */
+.theme-monokai {
+  --color-bg-primary: #272822;
+  --color-bg-secondary: #1e1f1b;
+  --color-bg-tertiary: #1a1b18;
+  --color-bg-hover: #3e3d32;
+  --color-text-primary: #f8f8f2;
+  --color-text-secondary: #90908a;
+  --color-text-muted: #5c5c50;
+  --color-accent-blue: #66d9e8;
+  --color-accent-green: #a6e22e;
+  --color-accent-yellow: #e6db74;
+  --color-accent-red: #f92672;
+  --color-accent-purple: #ae81ff;
+  --color-border: #3e3d32;
+  --color-input-bg: #1e1f1b;
+}
+
+/* Tokyo Night */
+.theme-tokyo-night {
+  --color-bg-primary: #1a1b26;
+  --color-bg-secondary: #16161e;
+  --color-bg-tertiary: #13131a;
+  --color-bg-hover: #292e42;
+  --color-text-primary: #c0caf5;
+  --color-text-secondary: #787c99;
+  --color-text-muted: #3b3d57;
+  --color-accent-blue: #7aa2f7;
+  --color-accent-green: #9ece6a;
+  --color-accent-yellow: #e0af68;
+  --color-accent-red: #f7768e;
+  --color-accent-purple: #bb9af7;
+  --color-border: #292e42;
+  --color-input-bg: #16161e;
+}
+
+/* Catppuccin Mocha */
+.theme-catppuccin {
+  --color-bg-primary: #1e1e2e;
+  --color-bg-secondary: #181825;
+  --color-bg-tertiary: #11111b;
+  --color-bg-hover: #313244;
+  --color-text-primary: #cdd6f4;
+  --color-text-secondary: #a6adc8;
+  --color-text-muted: #6c7086;
+  --color-accent-blue: #89b4fa;
+  --color-accent-green: #a6e3a1;
+  --color-accent-yellow: #f9e2af;
+  --color-accent-red: #f38ba8;
+  --color-accent-purple: #cba6f7;
+  --color-border: #45475a;
+  --color-input-bg: #181825;
+}
+
+/* Ayu Light */
+.theme-ayu-light {
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f3f4f5;
+  --color-bg-tertiary: #e7e8e9;
+  --color-bg-hover: #d9dadb;
+  --color-text-primary: #575f66;
+  --color-text-secondary: #8a9199;
+  --color-text-muted: #abb0b6;
+  --color-accent-blue: #399ee6;
+  --color-accent-green: #86b300;
+  --color-accent-yellow: #f2ae49;
+  --color-accent-red: #f07171;
+  --color-accent-purple: #a37acc;
+  --color-border: #d9dadb;
+  --color-input-bg: #fafafa;   /* 浅色主题白底 */
+}
+
+/* ---- 护眼主题 ---- */
+
+/* Solarized Light */
+.theme-solarized-light {
+  --color-bg-primary: #fdf6e3;
+  --color-bg-secondary: #eee8d5;
+  --color-bg-tertiary: #e4dcca;
+  --color-bg-hover: #d8d0be;
+  --color-text-primary: #657b83;
+  --color-text-secondary: #839496;
+  --color-text-muted: #93a1a1;
+  --color-accent-blue: #268bd2;
+  --color-accent-green: #859900;
+  --color-accent-yellow: #b58900;
+  --color-accent-red: #dc322f;
+  --color-accent-purple: #6c71c4;
+  --color-border: #d0c9b5;
+  --color-input-bg: #fdf6e3;   /* 浅色主题白底 */
+}
+
+/* Gruvbox Dark */
+.theme-gruvbox {
+  --color-bg-primary: #282828;
+  --color-bg-secondary: #32302f;
+  --color-bg-tertiary: #3c3836;
+  --color-bg-hover: #504945;
+  --color-text-primary: #ebdbb2;
+  --color-text-secondary: #a89984;
+  --color-text-muted: #7c6f64;
+  --color-accent-blue: #83a598;
+  --color-accent-green: #b8bb26;
+  --color-accent-yellow: #fabd2f;
+  --color-accent-red: #fb4934;
+  --color-accent-purple: #d3869b;
+  --color-border: #504945;
+  --color-input-bg: #32302f;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* 全局基础样式 */
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+  }
+
+  /* 主题过渡动画 */
+  html, body, div, button, input {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  /* 禁用 xterm 内部 transition，避免干扰终端 viewport 滚动 */
+  .xterm,
+  .xterm * {
+    transition: none !important;
+  }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-bg-hover);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: var(--color-bg-secondary);
+  }
+
+  /* 选中文本颜色 */
+  ::selection {
+    background-color: var(--color-accent-blue);
+    color: #ffffff;
+  }
+
+  /* 代码字体 */
+  code,
+  pre {
+    font-family: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  }
+
+  /* 禁用用户选择（某些 UI 元素） */
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* 焦点样式 */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 2px;
+  }
+
+  /* 禁用输入框自动填充的默认样式 */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-text-primary);
+    -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-secondary) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@layer utilities {
+  /* 自定义工具类 */
+  .text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 渐变背景 */
+  .bg-gradient-dark {
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  /* 卡片样式 */
+  .card {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  .card-hover {
+    transition: all 0.2s ease;
+  }
+
+  .card-hover:hover {
+    background-color: var(--color-bg-tertiary);
+    border-color: var(--color-text-muted);
+  }
+
+  /* 按钮过渡 */
+  .btn-transition {
+    transition: all 0.15s ease;
+  }
+
+  /* Allotment 分隔线样式 */
+  .allotment-separator {
+    background-color: var(--color-border) !important;
+  }
+
+  .allotment-separator:hover {
+    background-color: var(--color-accent-blue) !important;
+  }
+
+  /* 自定义滚动条样式类 */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-bg-hover);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+
+  /* 动画 */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* 右键菜单入场动画 */
+  .animate-context-menu {
+    animation: contextMenuIn 0.12s ease-out;
+  }
+
+  @keyframes contextMenuIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* 面板折叠/展开按钮 */
+  .panel-toggle-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 48px;
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .panel-toggle-btn:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-primary);
+    opacity: 1 !important;
+  }
+
+  /* 父容器 hover 时显示按钮 */
+  .relative:hover > .panel-toggle-btn {
+    opacity: 0.6;
+  }
+}
+
+/* ========== Markdown 渲染样式（assistant 消息） ========== */
+
+.markdown-body {
+  color: var(--color-text-primary);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 段落间距 */
+.markdown-body p {
+  margin: 0.4em 0;
+  line-height: 1.6;
+}
+
+.markdown-body > :first-child {
+  margin-top: 0;
+}
+
+.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* 标题 */
+.markdown-body h1 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 0.8em 0 0.4em;
+}
+
+.markdown-body h2 {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 0.7em 0 0.3em;
+}
+
+.markdown-body h3 {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin: 0.6em 0 0.3em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0.5em 0 0.2em;
+}
+
+/* 行内 code */
+.markdown-inline-code {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-accent-blue);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.9em;
+}
+
+/* 代码块 */
+.markdown-code-block {
+  background-color: #1a1e24;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.5em 0;
+  overflow-x: auto;
+  font-family: 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+
+.markdown-code-block::-webkit-scrollbar {
+  height: 6px;
+}
+
+.markdown-code-block::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.markdown-code-block::-webkit-scrollbar-thumb {
+  background: var(--color-bg-hover);
+  border-radius: 3px;
+}
+
+/* 链接 */
+.markdown-link {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+.markdown-link:hover {
+  text-decoration: underline;
+}
+
+/* 表格 */
+.markdown-table-wrapper {
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+
+.markdown-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.markdown-table th,
+.markdown-table td {
+  border: 1px solid var(--color-border);
+  padding: 0.4em 0.8em;
+  text-align: left;
+}
+
+.markdown-table th {
+  background-color: var(--color-bg-tertiary);
+  font-weight: 600;
+}
+
+.markdown-table tr:nth-child(even) {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* 引用块 */
+.markdown-body blockquote {
+  border-left: 3px solid var(--color-accent-blue);
+  margin: 0.5em 0;
+  padding: 0.3em 0.8em;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.markdown-body blockquote p {
+  margin: 0.2em 0;
+}
+
+/* 列表 */
+.markdown-body ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin: 0.4em 0;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin: 0.4em 0;
+}
+
+.markdown-body li {
+  margin: 0.15em 0;
+}
+
+.markdown-body li > ul,
+.markdown-body li > ol {
+  margin: 0.1em 0;
+}
+
+/* 分割线 */
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 0.8em 0;
+}
+
+/* 强调 */
+.markdown-body strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.markdown-body em {
+  font-style: italic;
+}
+
+/* 图片 */
+.markdown-body img {
+  max-width: 100%;
+  border-radius: 4px;
+}
