@@ -134,11 +134,17 @@ export const useSessionStore = create<SessionState>((set, get) => ({
 
       // ★ 从 session 列表推导 agents 映射，补充重启后 IPC 事件未覆盖的历史/子 agent 数据
       // session.config.agentId 有值 → 该 session 是某个父 session 的子 agent
+      // ★ Bug fix: 按 agentId 去重，防止同一个 agent 因数据重叠被多次添加
       const derivedAgents: Record<string, AgentInfo[]> = {}
+      const seenAgentIds = new Set<string>()
       for (const s of allSessions) {
         const agentId = s.config?.agentId
         const parentId = s.config?.parentSessionId
         if (!agentId || !parentId) continue
+
+        // ★ 去重：同一个 agentId 只处理一次（取最新的 session 记录）
+        if (seenAgentIds.has(agentId)) continue
+        seenAgentIds.add(agentId)
 
         // 将 SessionStatus 映射到 AgentInfo['status']
         let agentStatus: AgentInfo['status'] = 'pending'
@@ -680,6 +686,16 @@ export const useSessionStore = create<SessionState>((set, get) => ({
       set((state) => {
         const parentId = agentInfo.parentSessionId
         const existing = state.agents[parentId] || []
+        // ★ Bug fix: 去重检查，防止同一个 agentId 被多次 push（事件重复触发）
+        if (existing.some(a => a.agentId === agentInfo.agentId)) {
+          // 已存在则更新状态而非 push 新记录
+          return {
+            agents: {
+              ...state.agents,
+              [parentId]: existing.map(a => a.agentId === agentInfo.agentId ? agentInfo : a)
+            }
+          }
+        }
         return {
           agents: { ...state.agents, [parentId]: [...existing, agentInfo] }
         }
